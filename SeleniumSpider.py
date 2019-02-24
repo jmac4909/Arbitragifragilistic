@@ -2,6 +2,8 @@ import json
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import re
+import os
+import platform
 
 
 class SeleniumSpider:
@@ -9,7 +11,10 @@ class SeleniumSpider:
 		self.site = website
 
 		# Set up selenium
-		self.browser = webdriver.Safari(executable_path='/usr/bin/safaridriver')
+		if platform.system() == 'Windows':
+			self.browser = webdriver.Firefox()
+		else:
+			self.browser = webdriver.Safari(executable_path='/usr/bin/safaridriver') 
 		self.browser.get(self.site)
 		self.browser.implicitly_wait(4)  # wait for page to load
 		self.currentsport = ""  # im not 100% how strings work so this was the first way i tried that worked
