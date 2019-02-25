@@ -1,9 +1,7 @@
-import json
-from bs4 import BeautifulSoup
-from selenium import webdriver
-import re
-import os
 import platform
+import re
+
+from selenium import webdriver
 
 
 class SeleniumSpider:
@@ -14,14 +12,14 @@ class SeleniumSpider:
 		if platform.system() == 'Windows':
 			self.browser = webdriver.Firefox()
 		else:
-			self.browser = webdriver.Safari(executable_path='/usr/bin/safaridriver') 
+			self.browser = webdriver.Safari(executable_path='/usr/bin/safaridriver')
 		self.browser.get(self.site)
 		self.browser.implicitly_wait(4)  # wait for page to load
 		self.currentsport = ""  # im not 100% how strings work so this was the first way i tried that worked
 
 	def extract_games(self):
 		# extracting
-		table_id = self.browser.find_element_by_class_name('card-content')  # gets table
+		table_id = self.browser.find_element_by_class_name('coupon-table')  # gets table
 		rows = table_id.find_elements_by_tag_name('tr')  # get all of the rows in the table first one is header
 		games = []
 		for row in rows:
