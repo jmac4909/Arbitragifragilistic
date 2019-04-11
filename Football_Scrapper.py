@@ -74,6 +74,7 @@ if __name__ == '__main__':
 	x = Scrapper('https://www.betfair.com/exchange/plus/football')
 	p = x.get_rows()
 	data.append(p)
+	# no guarantee 13 pages
 	for i in range(13):
 		if i is not 0 or i is not 1:
 			x.get_website('https://www.betfair.com/exchange/plus/football/' + str(i))
