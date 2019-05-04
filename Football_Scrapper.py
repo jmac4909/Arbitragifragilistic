@@ -75,11 +75,15 @@ if __name__ == '__main__':
 	p = x.get_rows()
 	data.append(p)
 	# no guarantee 13 pages
-	for i in range(13):
-		if i is not 0 or i is not 1:
-			x.get_website('https://www.betfair.com/exchange/plus/football/' + str(i))
-			p = x.get_rows()
-			data.append(p)
+	i = 2
+	while True:
+		x.get_website('https://www.betfair.com/exchange/plus/football/' + str(i))
+		if x.browser.current_url == 'https://www.betfair.com/exchange/plus/football':
+			break
+		p = x.get_rows()
+		data.append(p)
+		i = i + 1
 	x.browser.close()
+
 	with open('football_data.json', 'w') as outfile:
 		json.dump(data, outfile)
